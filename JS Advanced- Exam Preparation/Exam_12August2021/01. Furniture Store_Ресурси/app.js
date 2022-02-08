@@ -37,13 +37,21 @@ function solve() {
     function addElementToDom(element) {
         const tr = document.createElement('tr');
         tr.classList.add('info');
-        tr.innerHTML = `<td>${element.model}</td><td>${element.price.toFixed(2)}</td><td><button class = "moreBtn">More Info</button><button class = "buyBtn">Buy it</button></td>`;
+        tr.innerHTML =
+            `<td>${element.model}</td>
+        <td>${element.price.toFixed(2)}</td>
+        <td>
+        <button class = "moreBtn">More Info</button>
+        <button class = "buyBtn">Buy it</button>
+        </td>`;
         const hideTr = document.createElement('tr');
         hideTr.classList.add('hide');
-        hideTr.innerHTML = 
-        `<td>Year: ${element.year}</td><td colspan = "3">Description: ${element.description}</td>`;
+        hideTr.innerHTML =
+            `<td>Year: ${element.year}</td>
+        <td colspan = "3">Description: ${element.description}</td>`;
 
-        furnitureList.append(tr, hideTr);
+        furnitureList.appendChild(tr);
+        furnitureList.appendChild(hideTr);
 
         const moreInfoButtons = tr.querySelectorAll('button');
         moreInfoButtons[0].addEventListener('click', showMoreInfo);
