@@ -35,8 +35,7 @@ class SummerCamp {
         if (!this.listOfParticipants.some(x => x.name == name)) {
             throw new Error(`The ${name} is not registered in the camp.`);
         } else {
-            //this.listOfParticipants.shift(x => x.name == name);
-            this.listOfParticipants = this.listOfParticipants.filter(x => x.name != name);
+            this.listOfParticipants.shift(x => x.name == name);
             return `The ${name} removed successfully.`;
         }
     }
