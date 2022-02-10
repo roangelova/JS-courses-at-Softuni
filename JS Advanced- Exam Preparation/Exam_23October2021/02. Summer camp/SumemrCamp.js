@@ -19,7 +19,7 @@ class SummerCamp {
             return `The ${name} is already registered at the camp.`;
         }
         let priceToStay = this.priceForTheCamp[condition];
-        if (money < priceToStay) {
+        if (Number(money) < priceToStay) {
             return `The money is not enough to pay the stay at the camp.`;
         }
         this.listOfParticipants.push({
@@ -53,7 +53,7 @@ class SummerCamp {
         } else {
             //WaterBalloonFights
             let second = this.listOfParticipants.find(x => x.name == participant2);
-            if (first == undefined || second == undefined) {
+            if (first == undefined || second == undefined || participant2=='') {
                 throw new Error(`Invalid entered name/s.`)
             };
             if (first.condition != second.condition) {
@@ -74,12 +74,21 @@ class SummerCamp {
     toString(){
     let result = [];
     result.push(`${this.organizer} will take ${this.listOfParticipants.length} participants on camping to ${this.location}`);
-     this.listOfParticipants = this.listOfParticipants.sort((b,a) => a.wins - b.wins);
+     this.listOfParticipants = this.listOfParticipants.sort((a,b) => b.wins - a.wins);
      for (const participant  of this.listOfParticipants) {
          result.push(`${participant.name} - ${participant.condition} - ${participant.power} - ${participant.wins}`);
      }
      return result.join('\n');
     } 
 }
+
+const summerCamp = new SummerCamp("Jane Austen", "Pancharevo Sofia 1137, Bulgaria");
+console.log(summerCamp.registerParticipant("Petar Petarson", "student", 300));
+console.log(summerCamp.timeToPlay("Battleship", "Petar Petarson"));
+console.log(summerCamp.registerParticipant("Sara Dickinson", "child", 200));
+console.log(summerCamp.registerParticipant("Dimitur Kostov", "student", 300));
+console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Dimitur Kostov"));
+
+console.log(summerCamp.toString());
 
 

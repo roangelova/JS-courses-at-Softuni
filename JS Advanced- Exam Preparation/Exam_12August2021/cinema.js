@@ -1,3 +1,5 @@
+const { expect } = require("chai");
+
 const cinema = {
     showMovies: function(movieArr) {
 
@@ -35,3 +37,11 @@ const cinema = {
 
     }
 };
+
+
+
+    describe("showMovies", function() {
+        it("must return an empty array", function() {
+            expect(cinema.showMovies([]).to.be.equal('There are currently no movies to show.'));
+ })});
+        
