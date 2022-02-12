@@ -11,8 +11,7 @@ class SummerCamp {
     }
 
     registerParticipant(name, condition, money) {
-        let allowedParticipants = Object.keys(this.priceForTheCamp);
-        if (!allowedParticipants.includes(condition)) {
+        if (!this.priceForTheCamp[condition]) {
             throw new Error('Unsuccessful registration at the camp.');
         }
         if (this.listOfParticipants.some(x => x.name == name)) {
@@ -35,7 +34,8 @@ class SummerCamp {
         if (!this.listOfParticipants.some(x => x.name == name)) {
             throw new Error(`The ${name} is not registered in the camp.`);
         } else {
-            this.listOfParticipants.shift(x => x.name == name);
+            let indexOfParticipant = this.listOfParticipants.findIndex(x => x.name == name);
+            this.listOfParticipants.splice(indexOfParticipant, 1);
             return `The ${name} removed successfully.`;
         }
     }
