@@ -1,7 +1,7 @@
-const { expect } = require("chai");
+
 
 const cinema = {
-    showMovies: function(movieArr) {
+    showMovies: function (movieArr) {
 
         if (movieArr.length == 0) {
             return 'There are currently no movies to show.';
@@ -11,7 +11,7 @@ const cinema = {
         }
 
     },
-    ticketPrice: function(projectionType) {
+    ticketPrice: function (projectionType) {
 
         const schedule = {
             "Premiere": 12.00,
@@ -26,7 +26,7 @@ const cinema = {
         }
 
     },
-    swapSeatsInHall: function(firstPlace, secondPlace) {
+    swapSeatsInHall: function (firstPlace, secondPlace) {
 
         if (!Number.isInteger(firstPlace) || firstPlace <= 0 || firstPlace > 20 ||
             !Number.isInteger(secondPlace) || secondPlace <= 0 || secondPlace > 20 || firstPlace === secondPlace) {
@@ -38,10 +38,5 @@ const cinema = {
     }
 };
 
+module.exports = { cinema };
 
-
-    describe("showMovies", function() {
-        it("must return an empty array", function() {
-            expect(cinema.showMovies([]).to.be.equal('There are currently no movies to show.'));
- })});
-        
