@@ -35,5 +35,5 @@ const testNumbers = {
     }
 };
 
-
+module.exports = { testNumbers };
 
