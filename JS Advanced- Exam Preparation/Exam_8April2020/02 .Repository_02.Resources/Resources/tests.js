@@ -26,7 +26,13 @@ describe("Repository", function () {
             let repo = new Repository(properties);
 
             expect(repo).to.have.property('props');
+            expect(repo).to.have.property('data');
             expect(repo.props).to.deep.equal(properties);
+        });
+        it("It should add data property upon init with no properties", function () {
+            let repo = new Repository();
+
+            expect(repo).to.have.property('data');
         });
 
         it("Should have property data on init", function () {
@@ -91,8 +97,20 @@ describe("Repository", function () {
                 age: 22,
                 birthday: '1998-01-06T22:00:00.000Z'
             };
+            let entity2 = {
+                name: "Pesho",
+                age: '22',
+                birthday: new Date(1998, 0, 7)
+            };
+            let entity3 = {
+                name: 123,
+                age: 22,
+                birthday:  new Date(1998, 0, 7)
+            };
             let repo = new Repository(properties);
             expect(() => repo.add(entity)).to.throw(Error, 'Property birthday is not of correct type');
+            expect(() => repo.add(entity2)).to.throw(Error, 'Property age is not of correct type');
+            expect(() => repo.add(entity3)).to.throw(Error, 'Property name is not of correct type');
         });
     });
     describe("GetId", function () {
@@ -133,9 +151,19 @@ describe("Repository", function () {
                 name: "Pesho",
                 age: 22,
             };
+            let invalidEntity2 = {
+                name: "Pesho",
+                birthday: new Date(1999, 0, 7)
+            };
+            let invalidEntity3 = {
+                birthday: new Date(1999, 0, 7),
+                age: 22,
+            };
             let repo = new Repository(properties);
             repo.add(entity);
             expect(() => repo.update(0, invalidEntity)).to.throw(Error, 'Property birthday is missing from the entity');
+            expect(() => repo.update(0, invalidEntity2)).to.throw(Error, 'Property age is missing from the entity');
+            expect(() => repo.update(0, invalidEntity3)).to.throw(Error, 'Property name is missing from the entity');
             
         });
         it("It should throw error if type of value is different", () => {
@@ -144,9 +172,21 @@ describe("Repository", function () {
                 age: 22,
                 birthday: '1998-01-06T22:00:00.000Z'
             };
+            let invalidEntity2 = {
+                name: 123,
+                age: 22,
+                birthday: '1998-01-06T22:00:00.000Z'
+            };
+            let invalidEntity3 = {
+                name: "Pesho",
+                age: '22',
+                birthday: '1998-01-06T22:00:00.000Z'
+            };
             let repo = new Repository(properties);
             repo.add(entity);
             expect(() => repo.update(0, invalidEntity)).to.throw(Error, 'Property birthday is not of correct type');
+            expect(() => repo.update(0, invalidEntity2)).to.throw(Error, 'Property name is not of correct type');
+            expect(() => repo.update(0, invalidEntity3)).to.throw(Error, 'Property age is not of correct type');
         });
 
     });
