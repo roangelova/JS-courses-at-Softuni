@@ -3,6 +3,7 @@ import { cats } from './catSeeder.js';
 import {styleMap} from '../node_modules/lit-html/directives/style-map.js';
 
 const allCats = document.getElementById('allCats');
+allCats.addEventListener('click', toggle);
 
 const cardTemplate = (data) => html`
 <ul>
@@ -32,7 +33,7 @@ function update() {
 
 
 function toggle(e) {
-const elementId = even.target.parentNode.querySelector('.status').id;
+const elementId = e.target.parentNode.querySelector('.status').id;
 const cat = cats.find(x => x.id == elementId);
 cat.info = !cat.info;
 update();
