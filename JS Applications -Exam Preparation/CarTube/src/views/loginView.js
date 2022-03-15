@@ -20,7 +20,7 @@ const loginTemplate = (onSubmit)=> html`
                 </form>
                 <div class="signin">
                     <p>Dont have an account?
-                        <a href="#">Sign up</a>.
+                        <a href="/register">Sign up</a>.
                     </p>
                 </div>
             </div>
