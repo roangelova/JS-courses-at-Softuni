@@ -22,7 +22,6 @@ export async function getById(id){
 }
 
 export async function getMyItems(userId){
-    console.log(endpoints.myItems(userId));
     return api.get(endpoints.myItems(userId));
 }
 
