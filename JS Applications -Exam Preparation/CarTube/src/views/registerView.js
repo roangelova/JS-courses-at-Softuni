@@ -44,7 +44,7 @@ export function renderRegister(ctx){
 
         authService.register(username,password)
         .then(() => {
-            ctx.page.redirect('/')
+            ctx.page.redirect('/listing')
         });
     };
 

@@ -10,6 +10,14 @@ export const login = (username, password) => {
             return user
         });
 
+};
+
+export const register = (username, password) => {
+    return request.post(api.register, { username, password })
+        .then(user => {
+            saveUser(user);
+            return user
+        });
 
 };
 
@@ -17,12 +25,24 @@ function saveUser(data) {
     localStorage.setItem(user_key, JSON.stringify(data));
 }
 
-function getUser(){
-    let user = localStorage.getItem(user_key);
+export function getUser() {
+    try {
+        let user = localStorage.getItem(user_key);
 
-    if (user) {
-       return JSON.parse(user);
+        if (user) {
+            return JSON.parse(user);
+        }
+    } catch (error) {
+        return undefined;
     }
 
-    return {};
-}
+
+
+};
+
+export const logout = () => {
+    return request.get(api.logout)
+    .finally(() => {
+        localStorage.removeItem(user_key)
+    })
+};
