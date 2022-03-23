@@ -1,5 +1,22 @@
-import { html, nothing} from "../../node_modules/lit-html/lit-html.js";
+import { html } from "../../node_modules/lit-html/lit-html.js";
 import * as carService from '../services/carService.js';
+
+
+import * as authService from '../services/authService.js';
+
+
+const myListingsTemplate = (cars) => html
+
+`
+    ${cars.length == 0
+        ? html`<p class="no-cars"> You haven't listed any cars yet.</p>`
+    
+        : html`<section id="my-listings">
+    <h1>My car listings</h1>
+    <div class="listings">${cars.map(carTemplate)}  </div>
+</section>`}
+       
+`;
 
 
 const carTemplate = (car) => html`          
@@ -20,26 +37,9 @@ const carTemplate = (car) => html`
 </div>
 `;
 
-const listingTemplate = (cars = []) => html`
-<section id="car-listings">
-            <h1>Car Listings</h1>
-            <div class="listings">
-
-         ${cars.map(carTemplate)}
-        ${cars.length == 0
-        ? html`<p class="no-cars">No cars in database.</p> `
-        : nothing}
-                
-            </div>
-        </section>
-
-`;
-
-export const renderListing = (ctx) => {
-    carService.getAll()
+export const renderMyListings = (ctx) => {
+    carService.getOwnListings(ctx.user._id)
         .then(cars => {
-            console.log(cars);
-            ctx.render(listingTemplate(cars));
-        })
-
-};
+            ctx.render(myListingsTemplate(cars))
+        });
+}
