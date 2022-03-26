@@ -1,5 +1,5 @@
-import * as api from '../api.js';
-import { clearUserData, setUserData } from '../util';
+import * as api from './api.js';
+import { clearUserData, setUserData } from '../util.js';
 
 
 const endpoints = {
