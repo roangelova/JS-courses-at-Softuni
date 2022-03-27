@@ -1,28 +1,40 @@
-import {html} from '../../node_modules/lit-html/lit-html.js';
+import { html } from '../../node_modules/lit-html/lit-html.js';
+import { createSubmitHandler } from '../util.js';
+import * as userService from '../api/userService.js'
 
-const loginViewTemplate = () => html`
+const loginViewTemplate = (onSubmit) => html`
 <section id="login-page" class="auth">
-            <form id="login">
+    <form @submit=${onSubmit}id="login">
 
-                <div class="container">
-                    <div class="brand-logo"></div>
-                    <h1>Login</h1>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Sokka@gmail.com">
+        <div class="container">
+            <div class="brand-logo"></div>
+            <h1>Login</h1>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Sokka@gmail.com">
 
-                    <label for="login-pass">Password:</label>
-                    <input type="password" id="login-password" name="password">
-                    <input type="submit" class="btn submit" value="Login">
-                    <p class="field">
-                        <span>If you don't have profile click <a href="/register">here</a></span>
-                    </p>
-                </div>
-            </form>
-        </section>
+            <label for="login-pass">Password:</label>
+            <input type="password" id="login-password" name="password">
+            <input type="submit" class="btn submit" value="Login">
+            <p class="field">
+                <span>If you don't have profile click <a href="/register">here</a></span>
+            </p>
+        </div>
+    </form>
+</section>
 `;
 
-export function renderLogin(ctx){
+export function renderLogin(ctx) {
 
-    ctx.render(loginViewTemplate());
+    ctx.render(loginViewTemplate(createSubmitHandler(ctx, onSubmit)));
 
 };
+
+async function onSubmit(ctx, data, e) {
+
+    //1-send request
+    await userService.login(data.email, data.password);
+    //2-reset from upon login
+    e.target.reset();
+    //3-redirect to home
+    ctx.page.redirect('/');
+}

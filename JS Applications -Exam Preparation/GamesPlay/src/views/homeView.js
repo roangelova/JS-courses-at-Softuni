@@ -20,20 +20,19 @@ const homeViewTemplate = (games) => html`
 </section>
 `;
 
-let gameTemplate = () => html`
+let gameTemplate = (game) => html`
 <div class="game">
     <div class="image-wrap">
-        <img src="./images/CoverFire.png">
+        <img src=${game.imageUrl}>
     </div>
-    <h3>Cover Fire</h3>
+    <h3>${game.title}</h3>
     <div class="rating">
         <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
     </div>
     <div class="data-buttons">
-        <a href="#" class="btn details-btn">Details</a>
+        <a href="/details/${game._id}" class="btn details-btn">Details</a>
     </div>
-</div>
-    
+</div> 
 `;
 
 export async function renderHomepage(ctx) {
