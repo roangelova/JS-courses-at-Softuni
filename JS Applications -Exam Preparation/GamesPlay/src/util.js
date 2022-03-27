@@ -23,8 +23,8 @@ export function getAccessToken(){
 export function createSubmitHandler(ctx, handler){
     return function(event){
         event.preventDefault();
-        const FormData = Object.fromEntries(new FormData(event.target));
+        const formData = Object.fromEntries(new FormData(event.target));
 
-        handler(ctx, FormData, event);
+        handler(ctx, formData, event);
     }
 }
