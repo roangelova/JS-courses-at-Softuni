@@ -7,7 +7,7 @@ const homeViewTemplate = (books) => html`
 
     <ul class="other-books-list">
 
-        ${books ?
+        ${books.length > 0 ?
             books.map(bookTemplate)
                 : html`
         <p class="no-books">No books in database!</p>`}
